@@ -200,6 +200,9 @@ export async function prismix(options: PrismixOptions) {
     let enums: DMMF.DatamodelEnum[] = [];
     schemasToMix.forEach((schema) => !!schema.enums && (enums = [...enums, ...schema.enums]));
 
+    let types: DMMF.Model[] = [];
+    schemasToMix.forEach((schema) => !!schema.types && (types = [...types, ...schema.types]));
+
     // use the last found datasources
     let datasources: DataSource[] = [];
     schemasToMix.forEach(

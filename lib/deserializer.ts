@@ -120,7 +120,7 @@ function renderUrl(envValue: EnvValue): string {
 
   return `url = ${value}`;
 }
-function renderProvider(provider: ConnectorType | string): string {
+function renderProvider(provider: ConnectorType | any): any {
   return `provider = "${provider}"`;
 }
 function renderOutput(path: string | null): string {
@@ -209,7 +209,7 @@ export async function deserializeGenerators(generators: GeneratorConfig[]) {
 export async function deserializeEnums(enums: DMMF.DatamodelEnum[]) {
   return enums.map((each) => deserializeEnum(each)).join('\n');
 }
-export async function deserializeTypes(types: DMMF.Datamodel[]) {
+export async function deserializeTypes(types: DMMF.Model[]) {
   return types.map((each) => deserializeType(each)).join('\n');
 }
 
