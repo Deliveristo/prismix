@@ -160,7 +160,7 @@ function deserializeModel(model: DMMF.Model): string {
 function deserializeType(type: DMMF.Model): string {
   const { name, fields, dbName, idFields, primaryKey, doubleAtIndexes, uniqueIndexes } = type;
   return renderBlock(
-    'model',
+    'type',
     name,
     [
       ...renderModelFields(fields),
@@ -168,7 +168,7 @@ function deserializeType(type: DMMF.Model): string {
       ...(doubleAtIndexes ?? []),
       renderDbName(dbName),
       renderIdFieldsOrPrimaryKey(idFields || primaryKey?.fields)
-    ]
+    ],
   );
 }
 
