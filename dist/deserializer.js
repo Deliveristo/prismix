@@ -117,7 +117,7 @@ function deserializeModel(model) {
 }
 function deserializeType(type) {
     const { name, fields, dbName, idFields, primaryKey, doubleAtIndexes, uniqueIndexes } = type;
-    return renderBlock('model', name, [
+    return renderBlock('type', name, [
         ...renderModelFields(fields),
         ...renderUniqueIndexes(uniqueIndexes),
         ...(doubleAtIndexes !== null && doubleAtIndexes !== void 0 ? doubleAtIndexes : []),
@@ -173,7 +173,7 @@ function deserializeEnums(enums) {
 exports.deserializeEnums = deserializeEnums;
 function deserializeTypes(types) {
     return __awaiter(this, void 0, void 0, function* () {
-        return types.map((each) => deserializeType(each)).join('\n');
+        return types.map((type) => deserializeType(type)).join('\n');
     });
 }
 exports.deserializeTypes = deserializeTypes;

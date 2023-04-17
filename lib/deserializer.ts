@@ -168,7 +168,7 @@ function deserializeType(type: DMMF.Model): string {
       ...(doubleAtIndexes ?? []),
       renderDbName(dbName),
       renderIdFieldsOrPrimaryKey(idFields || primaryKey?.fields)
-    ],
+    ]
   );
 }
 
@@ -210,7 +210,7 @@ export async function deserializeEnums(enums: DMMF.DatamodelEnum[]) {
   return enums.map((each) => deserializeEnum(each)).join('\n');
 }
 export async function deserializeTypes(types: DMMF.Model[]) {
-  return types.map((each) => deserializeType(each)).join('\n');
+  return types.map((type) => deserializeType(type)).join('\n');
 }
 
 // Adapted from https://github.com/IBM/prisma-schema-transformer/blob/53a173185b/src/deserializer.ts
