@@ -157,6 +157,21 @@ function deserializeModel(model: DMMF.Model): string {
   );
 }
 
+function deserializeType(type: DMMF.Model): string {
+  const { name, fields, dbName, idFields, primaryKey, doubleAtIndexes, uniqueIndexes } = type;
+  return renderBlock(
+    'model',
+    name,
+    [
+      ...renderModelFields(fields),
+      ...renderUniqueIndexes(uniqueIndexes),
+      ...(doubleAtIndexes ?? []),
+      renderDbName(dbName),
+      renderIdFieldsOrPrimaryKey(idFields || primaryKey?.fields)
+    ]
+  );
+}
+
 function deserializeDatasource(datasource: DataSource): string {
   const { activeProvider: provider, name, url } = datasource;
   return renderBlock('datasource', name, [renderProvider(provider), renderUrl(url)]);
@@ -193,6 +208,9 @@ export async function deserializeGenerators(generators: GeneratorConfig[]) {
 }
 export async function deserializeEnums(enums: DMMF.DatamodelEnum[]) {
   return enums.map((each) => deserializeEnum(each)).join('\n');
+}
+export async function deserializeTypes(types: DMMF.Datamodel[]) {
+  return types.map((each) => deserializeType(each)).join('\n');
 }
 
 // Adapted from https://github.com/IBM/prisma-schema-transformer/blob/53a173185b/src/deserializer.ts
